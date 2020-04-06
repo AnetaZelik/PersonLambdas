@@ -1,33 +1,50 @@
 package lambda;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static lambda.Person.nameFromB;
+
 public class Main {
     public static void main(String[] args) {
-        //implementacje interfejsów
-        InterfaceForLambda1 implInterfejsu1 = new Lambda1Exercises1();
-        InterfaceForLambda2 implInterfejsu2 = new LambdaExercises2();
-        InterfaceForLambda3 implInterfejsu3 = new LambdaExercises3();
+        //interfaces' implementations
+        InterfaceForLambda1 impl1 = new LambdaExercises1();
+        InterfaceForLambda2 impl2 = new LambdaExercises2();
+        InterfaceForLambda3 impl3 = new LambdaExercises3();
 
-        //anonimowe implementacje
-        InterfaceForLambda1 anonimowaImplInterfejsu1 = new InterfaceForLambda1() {
+        //anonymous implementations
+        InterfaceForLambda1 anonymImpl1 = new InterfaceForLambda1() {
+            @Override
             public void go() {
             }
         };
-        InterfaceForLambda2 anonimowaImplInterfejsu2 = new InterfaceForLambda2() {
+        InterfaceForLambda2 anonymImpl2 = new InterfaceForLambda2() {
             @Override
             public String go() {
-                return "idzie";
+                return "goes";
             }
         };
-        InterfaceForLambda3 anonimowaImplInterfejsu3 = new InterfaceForLambda3() {
+        InterfaceForLambda3 anonymImpl3 = new InterfaceForLambda3() {
             @Override
             public String go(String name) {
-                return name + " idzie";
+                return name + " goes";
             }
         };
-        //lambdy
-        InterfaceForLambda1 lambdaImplInterfejsu1 = () -> {
+
+        //lambdas
+        InterfaceForLambda1 lambdaImpl1 = () -> {
         };
-        InterfaceForLambda2 lambdaImplInterfejsu2 = () -> "idzie";
-        InterfaceForLambda3 lambdaImplInterfejsu3 = name -> name + " idzie";
+        InterfaceForLambda2 lambdaImpl2 = () -> "goes";
+        InterfaceForLambda3 lambdaImpl3 = name -> name + " goes";
+
+        List<Person> people = List.of(
+                new Person("Bill"),
+                new Person("John"),
+                new Person("Jack"),
+                new Person("Mary"));
+        var collect = people
+                .stream()
+                .filter(nameFromB)
+                .collect(Collectors.toList());
     }
 }
